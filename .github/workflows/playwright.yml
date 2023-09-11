@@ -47,6 +47,6 @@ jobs:
     - uses: actions/upload-artifact@v3
       if: always()
       with:
-        name: playwright-report-$PROJECT_NAME-$BRANCH_NAME-$CURRENT_DATE_TIME-$BUILD_NUMBER
+        name: playwright-report-${PROJECT_NAME}-$BRANCH_NAME-$CURRENT_DATE_TIME-$BUILD_NUMBER
         path: playwright-report/
         retention-days: 30
