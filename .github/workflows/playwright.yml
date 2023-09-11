@@ -1,3 +1,4 @@
+
 name: Playwright Tests
 on:
   push:
@@ -31,12 +32,21 @@ jobs:
         echo "PROJECT_NAME=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
         echo "BRANCH_NAME=$(echo $GITHUB_REF_NAME)" >> $GITHUB_ENV
         echo CURRENT_DATE_TIME="${{ steps.time.outputs.time }}" >> $GITHUB_ENV
+        echo BUILD_NUMBER="${{ github.run_number }}" >> $GITHUB_ENV
         ls -al
-        mv playwright-report playwright-report-$PROJECT_NAME-$BRANCH_NAME-$CURRENT_DATE_TIME
-        ls -al   
+        mv playwright-report playwright-report-$PROJECT_NAME-$BRANCH_NAME-$CURRENT_DATE_TIME-$BUILD_NUMBER
+        ls -al
+    
+    - name: Output Run ID
+      run: echo ${{ github.run_id }}
+    - name: Output Run Number
+      run: echo ${{ github.run_number }}
+    - name: Output Run Attempt
+      run: echo ${{ github.run_attempt }}
+      
     - uses: actions/upload-artifact@v3
       if: always()
       with:
         name: playwright-report
-        path: playwright-report-$PROJECT_NAME-$BRANCH_NAME-$CURRENT_DATE_TIME
+        path: playwright-report-$PROJECT_NAME-$BRANCH_NAME-$CURRENT_DATE_TIME-$BUILD_NUMBER
         retention-days: 30
