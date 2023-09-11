@@ -28,10 +28,11 @@ jobs:
 
     - name: Rename Playwright Package
       run: |
-        echo "PROJECT_NAME=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)"
-        echo "BRANCH_NAME=$(echo $GITHUB_REF_NAME)"
-        echo 'CURRENT_DATE_TIME="${{ steps.time.outputs.time }}"'
-        mv playwright-report $PROJECT_NAME-$BRANCH_NAME-$CURRENT_DATE_TIME
+        echo "PROJECT_NAME=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
+        echo "BRANCH_NAME=$(echo $GITHUB_REF_NAME)" >> $GITHUB_ENV
+        echo CURRENT_DATE_TIME="${{ steps.time.outputs.time }}" >> $GITHUB_ENV
+        ls -al
+        mv playwright-report playwright-report-$PROJECT_NAME-$BRANCH_NAME-$CURRENT_DATE_TIME
     - uses: actions/upload-artifact@v3
       if: always()
       with:
