@@ -19,6 +19,16 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
+    - name: Rename Playwright Package
+      run: |
+        echo "PROJECT_NAME=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)"
+        echo "BRANCH_NAME=$(echo $GITHUB_REF_NAME)"
+        echo "CURRENT_DATE=${{ steps.date.outputs.date }}"
+        mv playwright-report/index.html playwright-report/$PROJECT_NAME-$BRANCH_NAME-$CURRENT_DATE
     - uses: actions/upload-artifact@v3
       if: always()
       with:
