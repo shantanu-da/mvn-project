@@ -33,6 +33,7 @@ jobs:
         echo CURRENT_DATE_TIME="${{ steps.time.outputs.time }}" >> $GITHUB_ENV
         ls -al
         mv playwright-report playwright-report-$PROJECT_NAME-$BRANCH_NAME-$CURRENT_DATE_TIME
+        ls -al   
     - uses: actions/upload-artifact@v3
       if: always()
       with:
