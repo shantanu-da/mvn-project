@@ -21,6 +21,10 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: list
+      run: | 
+        ls -al
+        pwd
     - name: Run Playwright tests
       run: npx playwright test
     - name: Get Time
