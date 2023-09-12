@@ -8,9 +8,10 @@ jobs:
   container-testing:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    container: 'ubuntu:20.04'
-    volumes:
-        - ./:/opt/task/
+    container: 
+      image: 'ubuntu:20.04'
+      volumes:
+          - ./:/opt/task/
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
