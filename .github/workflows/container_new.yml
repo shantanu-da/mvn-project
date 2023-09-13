@@ -8,10 +8,10 @@ jobs:
   container-testing:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    # container: 
-    #   image: 'mcr.microsoft.com/playwright:v1.34.0-jammy'
-    #   volumes:
-    #       - ./:/tmp/
+    container: 
+      image: 'mcr.microsoft.com/playwright:v1.34.0-jammy'
+      volumes:
+          - ./:/tmp/
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
