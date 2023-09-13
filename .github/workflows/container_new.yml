@@ -30,7 +30,7 @@ jobs:
     - name: Install Playwright
       run: | 
         ls -al
-        npx playwright install
+        npx playwright install --with-deps
         ls -al
 
     - name: Run tests
