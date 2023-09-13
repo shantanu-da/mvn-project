@@ -49,6 +49,9 @@ jobs:
         echo "BRANCH_NAME=$(echo $GITHUB_REF_NAME)" >> $GITHUB_ENV
         echo CURRENT_DATE_TIME="${{ steps.time.outputs.time }}" >> $GITHUB_ENV
         echo BUILD_NUMBER="${{ github.run_number }}" >> $GITHUB_ENV
+        
+    - name: Testing CURL
+      run: curl -IL https://knowledge.mckessonspecialtyhealth.com/
 
     - uses: actions/upload-artifact@v3
       if: always()
