@@ -25,12 +25,18 @@ jobs:
         npm -version
         npm i -D @playwright/test
         npm ci
+        ls -al
 
     - name: Install Playwright
-      run: npx playwright install
+      run: | 
+        ls -al
+        npx playwright install
+        ls -al
 
     - name: Run tests
-      run: npx playwright test
+      run: | 
+        ls -al
+        npx playwright test
 
     - name: Get Time
       id: time
