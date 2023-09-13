@@ -8,8 +8,8 @@ jobs:
   container-testing:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    # container: 
-    #   image: 'ubuntu:20.04'
+    container: 
+      image: 'mcr.microsoft.com/playwright:v1.34.0-jammy'
     #   volumes:
     #       - ./:/opt/task/
     steps:
@@ -23,15 +23,18 @@ jobs:
     #   run: npx playwright install --with-deps
     # - name: Run Playwright tests
     #   run: npx playwright test
-    - name: Install
-      uses: ianwalter/playwright-container@v3.0.0
+    - uses: actions/setup-node@v3
       with:
-        args: npm ci
+        node-version: 16
 
-    - name: Test
-      uses: ianwalter/playwright-container@v3.0.0
-      with:
-        args: npm test
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Install Playwright
+      run: npx playwright install --with-deps
+
+    - name: Run tests
+      run: npx playwright test
 
     - name: Get Time
       id: time
