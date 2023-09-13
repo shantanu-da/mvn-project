@@ -10,26 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     container: 
       image: 'mcr.microsoft.com/playwright:v1.34.0-jammy'
-    #   volumes:
-    #       - ./:/opt/task/
+      volumes:
+          - ./:/opt/task/
     steps:
     - uses: actions/checkout@v3
-    # - uses: actions/setup-node@v3
-    #   with:
-    #     node-version: 18
-    # - name: Install dependencies
-    #   run: npm ci
-    # - name: Install Playwright Browsers
-    #   run: npx playwright install --with-deps
-    # - name: Run Playwright tests
-    #   run: npx playwright test
     - uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 18
 
     - name: Install dependencies
       run: npm ci
-
+`
     - name: Install Playwright
       run: npx playwright install
 
@@ -49,7 +40,7 @@ jobs:
         echo "BRANCH_NAME=$(echo $GITHUB_REF_NAME)" >> $GITHUB_ENV
         echo CURRENT_DATE_TIME="${{ steps.time.outputs.time }}" >> $GITHUB_ENV
         echo BUILD_NUMBER="${{ github.run_number }}" >> $GITHUB_ENV
-        
+
     - name: Testing CURL
       run: curl -IL https://knowledge.mckessonspecialtyhealth.com/
 
