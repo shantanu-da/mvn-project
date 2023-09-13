@@ -23,7 +23,7 @@ jobs:
         uname -a
         ls -al
         npm -version
-        npm init playwright@latest
+        npm i -D @playwright/test
         npm ci
 
     - name: Install Playwright
