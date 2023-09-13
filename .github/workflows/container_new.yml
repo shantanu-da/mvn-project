@@ -19,7 +19,11 @@ jobs:
         node-version: 16
 
     - name: Install dependencies
-      run: npm ci
+      run: |
+        uname -a
+        ls -al
+        npm -version
+        npm ci
 
     - name: Install Playwright
       run: npx playwright install
