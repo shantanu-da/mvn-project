@@ -15,7 +15,7 @@ jobs:
       - name: Wait for Manual Approval
         run: |
           ls -al
-          test
+
 
 
 
