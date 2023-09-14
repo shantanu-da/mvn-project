@@ -1,28 +1,70 @@
 name: Second Job
+
+on:
+  workflow_run:
+    workflows: [""First Job"]
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: |
+          ls -al
+          whoami
+
+  approval:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Request approval
+        id: approval
+        uses: "actions/github-script@v6"
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: approvals } = await github.pulls.listReviewRequests({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: ${{ github.event.workflow_run.head_repository.pull_requests[0].number }}
+            });
+            if (approvals.length === 0) {
+              await github.pulls.createReviewRequest({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: ${{ github.event.workflow_run.head_repository.pull_requests[0].number }},
+                reviewers: ['mehulsharma2010', 'username2']  # Add the usernames of reviewers
+              });
+            }
+
+
+# name: Second Job
+# # on:
+# #   workflow_dispatch:
+# #   workflow_run:
+# #     workflows: ["First Job"]
+# #     inputs:
+# #       permission:
+# #         description: 'Do you want to run this workflow?'
+# #         required: true
+# #         default: 'no'
+
 # on:
 #   workflow_dispatch:
-#   workflow_run:
-#     workflows: ["First Job"]
 #     inputs:
 #       permission:
 #         description: 'Do you want to run this workflow?'
 #         required: true
 #         default: 'no'
 
-on:
-  workflow_dispatch:
-    inputs:
-      permission:
-        description: 'Do you want to run this workflow?'
-        required: true
-        default: 'no'
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check Permission
-        id: check-permission
-        run: echo "Permission is ${{ github.event.inputs.permission }}"
+#     steps:
+#       - name: Check Permission
+#         id: check-permission
+#         run: echo "Permission is ${{ github.event.inputs.permission }}"
 
