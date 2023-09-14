@@ -1,0 +1,20 @@
+name: Second Job
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["First Job"]
+    types:
+      - completed
+    inputs:
+      permission:
+        description: 'Do you want to run this workflow?'
+        required: true
+        default: 'no'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Permission
+        id: check-permission
+        run: echo "Permission is ${{ github.event.inputs.permission }}"

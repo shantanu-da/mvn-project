@@ -1,0 +1,20 @@
+
+name: First Job
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  First_Workflow:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Running Commands
+      run: |
+        curl -IL https://ontada-jenkins-ops.dev.aks.west.us.mckesson.com/
+        ls -al
+        pwd
+
+
