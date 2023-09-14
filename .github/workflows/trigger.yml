@@ -16,8 +16,7 @@ jobs:
         run: |
           ls -al
           test
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
 # name: Second Jo
