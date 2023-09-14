@@ -1,4 +1,5 @@
-name: Second Job
+
+name:  Second Job
 
 on:
   workflow_run:
@@ -7,25 +8,64 @@ on:
       - completed
 
 jobs:
-  build:
+  manual-approval:
     runs-on: ubuntu-latest
-    steps:
-      - name: Test
-        run: |
-          ls -al
-          whoami
 
-  approval:
-    runs-on: ubuntu-latest
-    needs: build
     steps:
-      - name: Wait for approval
-        id: approval
-        uses: actions/wait-for-approval@v2
-
-      - name: test command
+      - name: Wait for Manual Approval
         run: |
-          pwd
+          # Check if a specific comment exists in the triggering workflow's run
+          if [[ $(gh api repos/:owner/:repo/actions/runs/$GITHUB_RUN_ID/jobs) =~ "Manual approval comment" ]]; then
+            echo "Manual approval comment found. Proceeding with the workflow."
+          else
+            echo "Manual approval comment not found. Workflow is not approved."
+            exit 1
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+# name: Second Job
+
+# on:
+#   workflow_run:
+#     workflows: ["First Job"]
+#     types:
+#       - completed
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Test
+#         run: |
+#           ls -al
+#           whoami
+
+#   approval:
+#     runs-on: ubuntu-latest
+#     needs: build
+#     steps:
+#       - name: Request approval
+#         id: approval
+#         uses: "actions/github-script@v6"
+#         with:
+#           github-token: ${{ secrets.GITHUB_TOKEN }}
+#           script: |
+#             const { data: approvals } = await github.pulls.listReviewRequests({
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#               pull_number: ${{ github.event.workflow_run.head_repository.pull_requests[0].number }}
+#             });
+#             if (approvals.length === 0) {
+#               await github.pulls.createReviewRequest({
+#                 owner: context.repo.owner,
+#                 repo: context.repo.repo,
+#                 pull_number: ${{ github.event.workflow_run.head_repository.pull_requests[0].number }},
+#                 reviewers: ['mehulsharma2010', 'username2']  # Add the usernames of reviewers
+#               });
+#             }
+
 
 # name: Second Job
 # # on:
