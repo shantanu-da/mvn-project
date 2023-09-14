@@ -14,13 +14,8 @@ jobs:
     steps:
       - name: Wait for Manual Approval
         run: |
-          # Check if a specific comment exists in the triggering workflow's run
-          if [[ $(gh api repos/:owner/:repo/actions/runs/$GITHUB_RUN_ID/jobs) =~ "Manual approval comment" ]]; then
-            echo "Manual approval comment found. Proceeding with the workflow."
-          else
-            echo "Manual approval comment not found. Workflow is not approved."
-            exit 1
-          fi
+          ls -al
+          test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
