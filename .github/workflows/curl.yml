@@ -13,7 +13,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Running Commands
       run: |
-        curl -IL https://ontada-jenkins-ops.dev.aks.west.us.mckesson.com/
+        curl -IL https://google.com/
         ls -al
         pwd
 

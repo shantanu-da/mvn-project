@@ -3,8 +3,6 @@ on:
   workflow_dispatch:
   workflow_run:
     workflows: ["First Job"]
-    types:
-      - completed
     inputs:
       permission:
         description: 'Do you want to run this workflow?'
