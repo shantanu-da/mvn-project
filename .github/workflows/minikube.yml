@@ -1,0 +1,27 @@
+
+name: Deploy Workflow
+on:
+  workflow_dispatch:
+    inputs:
+      deploy-environment:
+        type: choice
+        description: 'Environment to deploy to'
+        options:
+        - dev
+        required: true
+        default: 'dev'
+      image-tag:
+        description: 'Docker tag to deploy'
+        required: true
+        default: 'latest'
+
+jobs:
+  rollback:
+    runs-on: self-hosted
+    steps:
+      - name: TEST MINIKUBE
+        run: |
+          minikube status
+          kubectl get po 
+
+
