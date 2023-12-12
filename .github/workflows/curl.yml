@@ -1,20 +1,21 @@
 
-name: First Job
+name: POC | MCK
 on:
-  push:
-    branches:
-      - main
+on:      
+  workflow_dispatch:
+    inputs:
+      restart-controllers:
+        type: boolean
+        required: true
+        default: false
 
 jobs:
   First_Workflow:
-    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: Running Commands
       run: |
-        curl -IL https://google.com/
         ls -al
         pwd
-
 
