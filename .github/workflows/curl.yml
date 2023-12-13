@@ -41,5 +41,5 @@ jobs:
             echo "releaseNumber=`echo ${BRANCH_NAME} | cut -d- -f 2`"        
           fi
           echo $releaseNumber
-          bash ./test.sh
+          bash ./test.sh $releaseNumber
 
