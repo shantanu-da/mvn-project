@@ -9,10 +9,10 @@ on:
         type: choice
         default: "lynx-web-0.1020.release_lynx-RELEASE_6.13.4"
         options:
-          - lynxmobile-replica-master-2023-12-04-080835-580
-          - lynxmobile-releases-1.1.0-2023-12-04-080835-582
-          - lynxmobile-releases-1.6.0-2023-12-04-080835-583
-          - lynxmobile-releases-3.1.0-2023-12-04-080835-584
+          - MVN-PROJECT-master-2023-12-04-080835-580
+          - MVN-PROJECT-releases-1.1.0-2023-12-04-080835-582
+          - MVN-PROJECT-releases-1.6.0-2023-12-04-080835-583
+          - MVN-PROJECT-releases-3.1.0-2023-12-04-080835-584
       restart-controllers:
         type: boolean
         required: true
