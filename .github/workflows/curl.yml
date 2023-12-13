@@ -1,6 +1,5 @@
 
 name: POC | MCK
-on:
 on:      
   workflow_dispatch:
     inputs:
