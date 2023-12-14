@@ -22,7 +22,7 @@ env:
   TAG_NUMBER: "${{ github.event.inputs.release-version }}"
   DATABASE_UPDATE: "${{ github.event.inputs.database-update }}"
   ENV: "${{ github.event.inputs.deploy-environment }}"
-  PROJECT_NAME: "lynx-mobile"
+  PROJECT_NAME: "mvn-project"
 
 jobs:
   First_Workflow:
