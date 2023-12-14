@@ -43,5 +43,6 @@ jobs:
             echo "releaseNumber=`echo ${releaseNumber}`" >> $GITHUB_ENV  
           fi
           echo $releaseNumber
-          bash ./test.sh $releaseNumber
+          # bash ./test.sh $releaseNumber
+          bash ./test.sh
 
