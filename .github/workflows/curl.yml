@@ -17,6 +17,16 @@ on:
         type: boolean
         required: true
         default: false
+      database-update:
+        description: 'Select the environment if a database update needed. If not then select "false".'
+        type: choice
+        required: false
+        default: 'false'
+        options:
+        - 'false'
+        - LMDA
+        - LMDB
+        - LMDC
 
 env:
   TAG_NUMBER: "${{ github.event.inputs.release-version }}"
@@ -32,6 +42,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Running Commands
+        if: ${{ github.event.inputs.restart-controllers == 'true' }} || ${{ github.event.inputs.database-update != 'false' }}
         run: |
           set -ex
           echo $PROJECT_NAME
@@ -44,5 +55,6 @@ jobs:
           fi
           echo $releaseNumber
           # bash ./test.sh $releaseNumber
-          bash ./test.sh
+          
+
 

@@ -2,7 +2,7 @@
 
 set -ex
 
-# releaseNumber=$1
+releaseNumber=$1
 
 echo "Testing Script"
 echo $releaseNumber
