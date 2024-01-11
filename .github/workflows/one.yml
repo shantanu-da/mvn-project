@@ -1,0 +1,16 @@
+# Workflow 1
+name: Workflow1
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set variable
+      run: echo "DB_UPDATE=LMDA" >> $GITHUB_ENV
+    - name: Publish artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: $GITHUB_ENV
+        
