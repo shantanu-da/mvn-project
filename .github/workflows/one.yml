@@ -20,10 +20,12 @@ jobs:
     runs-on: ubuntu-latest
     if: always()
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
     - name: Call Another Workflow
       if: ${{ needs.build.result == 'failure' }}
       run: |
         gh workflow run two.yml -f name=Workflow2 -f greeting=hello
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
