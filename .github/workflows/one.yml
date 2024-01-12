@@ -18,9 +18,10 @@ jobs:
   post_fail:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ needs.build.result == 'failure' }}
+    if: always()
     steps:
     - name: Call Another Workflow
+      if: ${{ needs.build.result == 'failure' }}
       run: echo "DB_UPDATE=LMDA" >> $GITHUB_ENV
 
         
