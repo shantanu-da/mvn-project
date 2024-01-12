@@ -8,9 +8,18 @@ jobs:
     steps:
     - name: Set variable
       run: echo "DB_UPDATE=LMDA" >> $GITHUB_ENV
+    
     - name: Publish artifact
       uses: actions/upload-artifact@v2
       with:
         name: my-artifact
         path: $GITHUB_ENV
+  
+  post_fail:
+    runs-on: ubuntu-latest
+    if: ${{ failure() }}
+    steps:
+    - name: Call Another Workflow
+      run: echo "DB_UPDATE=LMDA" >> $GITHUB_ENV
+
         
