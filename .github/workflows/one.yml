@@ -30,3 +30,17 @@ jobs:
         gh workflow run two.yml -f greeting=hello
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  post_success:
+    needs: build
+    permissions: write-all
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Call Another Workflow
+      if: ${{ needs.build.result == 'failure' }}
+      run: |
+        echo "Job success"
