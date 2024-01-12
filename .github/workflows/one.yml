@@ -17,7 +17,7 @@ jobs:
   
   post_fail:
     runs-on: ubuntu-latest
-    if: failure()
+    if: ${{ !always() && failure() && !cancelled() }}
     steps:
     - name: Call Another Workflow
       run: echo "DB_UPDATE=LMDA" >> $GITHUB_ENV
