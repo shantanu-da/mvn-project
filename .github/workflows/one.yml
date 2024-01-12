@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Set variable
-      run: echo "DB_UPDATE=LMDA" >> $GITHUB_ENV
+      run: eco "DB_UPDATE=LMDA" >> $GITHUB_ENV
     
     - name: Publish artifact
       uses: actions/upload-artifact@v2
