@@ -22,6 +22,7 @@ jobs:
     steps:
     - name: Call Another Workflow
       if: ${{ needs.build.result == 'failure' }}
-      run: echo "DB_UPDATE=LMDA" >> $GITHUB_ENV
+      run: |
+        gh workflow run two.yml -f name=Workflow2 -f greeting=hello
 
         

@@ -1,16 +1,18 @@
 # Workflow 2
 name: Workflow2
-on:
-  workflow_run:
-    workflows: ["Workflow1"]
+on: 
+  workflow_dispatch:
+    inputs:
+      greeting:
+        description: 'Test'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
+  
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: my-artifact
     - name: Use variable
-      run: echo "Variable value is ${{ env.DB_UPDATE }}"
-      
+      run: echo "Variable value is ${{ env.greeting }}"
