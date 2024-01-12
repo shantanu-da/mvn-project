@@ -27,6 +27,6 @@ jobs:
     - name: Call Another Workflow
       if: ${{ needs.build.result == 'failure' }}
       run: |
-        gh workflow run two.yml -f name=Workflow2 -f greeting=hello
+        gh workflow run two.yml -f greeting=hello
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
