@@ -15,4 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Use variable
-      run: echo "Variable value is ${{ env.greeting }}"
+      run: |
+        echo "Variable value is ${{ env.greeting }}"
+        echo "Variable value is $greeting"
