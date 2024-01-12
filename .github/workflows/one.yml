@@ -19,7 +19,7 @@ jobs:
     needs: build
     permissions: write-all
     runs-on: ubuntu-latest
-    if: always()
+    if: failure()
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
