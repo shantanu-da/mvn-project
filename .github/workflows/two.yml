@@ -13,3 +13,4 @@ jobs:
         name: my-artifact
     - name: Use variable
       run: echo "Variable value is ${{ env.DB_UPDATE }}"
+      
