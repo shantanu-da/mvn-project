@@ -19,6 +19,7 @@ jobs:
     needs: build
     permissions: write-all
     runs-on: ubuntu-latest
+    environment: prod
     if: failure()
     steps:
     - name: Checkout repository
