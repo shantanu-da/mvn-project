@@ -18,8 +18,8 @@ jobs:
   post_fail:
     needs: build
     permissions: write-all
+    actions_variables: write
     runs-on: ubuntu-latest
-    environment: prod
     if: failure()
     steps:
     - name: Checkout repository
