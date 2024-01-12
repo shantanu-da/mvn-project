@@ -9,6 +9,9 @@ on:
         default: 'warning'
       tags:
         description: 'Test scenario tags'
+
+env:
+  greeting: ${{ github.event.inputs.greeting }}
   
 jobs:
   deploy:
