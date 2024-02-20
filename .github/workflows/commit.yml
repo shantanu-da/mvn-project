@@ -1,0 +1,18 @@
+# Workflow 1
+name: "Commit Testing"
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout specific commit
+      uses: actions/checkout@v2
+      with:
+        ref: c9895e4fd72ef1a78129e701fec693c4703a1e15
+  
+    - name: Testing
+      run: |
+        ls -al
+        pwd
+        git logs --pretty --oneline
