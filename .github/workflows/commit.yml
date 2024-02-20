@@ -9,10 +9,13 @@ jobs:
     - name: Checkout specific commit
       uses: actions/checkout@v2
       with:
-        ref: c9895e4fd72ef1a78129e701fec693c4703a1e15
+        ref: f3275faa4c5fb512583a7cfd65348904f047c01a
   
     - name: Testing
       run: |
         ls -al
+        cat  .github/workflows/commit.yml
         pwd
-        git logs --pretty --oneline
+
+        git log --pretty --oneline
+
