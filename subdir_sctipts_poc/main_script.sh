@@ -30,7 +30,6 @@ fetchSQLFiles() {
 
 directory="subdir_sctipts_poc/sql_files" 
 choice=$1
-set -ex
 if [[ ${choice} == "fetchSQLFiles" ]] ; then
     fetchSQLFiles $directory 
 
