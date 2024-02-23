@@ -1,0 +1,40 @@
+
+name: POC | MCK
+on:      
+  workflow_dispatch:
+    inputs:
+      want-subdir-execution:
+        type: boolean
+        required: true
+        default: false
+      database-update:
+        description: 'Select the environment if a database update needed. If not then select "false".'
+        type: choice
+        required: false
+        default: 'false'
+        options:
+        - 'false'
+        - LMDA
+        - LMDB
+        - LMDC
+
+env:
+  execute_subdir_execution: "${{ github.event.inputs.want-subdir-execution }}"
+  DATABASE_UPDATE: "${{ github.event.inputs.database-update }}"
+  ENV: "${{ github.event.inputs.deploy-environment }}"
+  PROJECT_NAME: "mvn-project"
+
+jobs:
+  sub_dir:
+    name: "Test Subdirectory Execution"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Running DB Update
+        if: ${{  github.event.inputs.database-update != 'false' }}
+        run: |
+          if [[ ${{ env.execute_subdir_execution == true }} ]]; then
+            echo "This is true"
+          else
+            echo "Not True"
