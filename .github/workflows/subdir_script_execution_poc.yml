@@ -37,7 +37,9 @@ jobs:
         run: |
           echo "Testing Script"
           if [[ ${{ env.execute_subdir_execution }} == true ]]; then
+            ls
             pushd subdir_sctipts_poc
+            ls -al
             bash main_script.sh fetchSQLFilesinSubDir
           else
             pushd subdir_sctipts_poc
