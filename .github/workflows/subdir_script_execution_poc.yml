@@ -39,3 +39,4 @@ jobs:
             echo "This is true"
           else
             echo "Not True"
+          fi
