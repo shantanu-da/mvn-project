@@ -3,10 +3,6 @@ name: POC | MCK
 on:      
   workflow_dispatch:
     inputs:
-      want-subdir-execution:
-        type: boolean
-        required: true
-        default: false
       database-update:
         description: 'Select the environment if a database update needed. If not then select "false".'
         type: choice
@@ -17,6 +13,11 @@ on:
         - LMDA
         - LMDB
         - LMDC
+
+      want-subdir-execution:
+        type: boolean
+        required: true
+        default: false
 
 env:
   execute_subdir_execution: "${{ github.event.inputs.want-subdir-execution }}"
@@ -36,7 +37,9 @@ jobs:
         run: |
           echo "Testing Script"
           if [[ ${{ env.execute_subdir_execution }} == true ]]; then
-            echo "This is true"
+            pushd subdir_sctipts_poc
+            bash main_script.sh fetchSQLFilesinSubDir
           else
-            echo "Not True"
+            pushd subdir_sctipts_poc
+            bash main_script.sh fetchSQLFiles
           fi
