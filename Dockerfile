@@ -14,8 +14,8 @@ FROM openjdk:8-jdk-alpine
 ENV JAVA_OPTIONS "-Djava.net.preferIPv4Stack=true"
 WORKDIR /app
 
-# Use a wildcard to copy any JAR file from /src/target/ to /app/app.jar
-COPY --from=builder /src/target/demo-*.jar /app/app.jar
+# Use a shell command to find the JAR file dynamically and then copy it
+RUN cp $(find /src/target -name 'demo-*.jar' -type f -print -quit) /app/app.jar
 
 CMD ["java", "-jar", "/app/app.jar"]
 EXPOSE 8080
